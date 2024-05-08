@@ -9,8 +9,10 @@
 <body>
 <div class="container">
     <h1>Memory Game</h1>
-    <h2>Score: 0</h2>
-    <button class="btn">Start Game</button>
+    <h2 id="score">Score: 0</h2>
+    <h3 id="elapsed-time">Elapsed Time: 0s</h3>
+    <h3 id="remaining-time">Remaining Time: 60s</h3>
+    <button class="btn" id="start-btn">Start Game</button>
     <div class="board">
         <!-- Grid of cards -->
         <div class="card">?</div>
@@ -51,5 +53,60 @@
         <div class="card">?</div>
     </div>
 </div>
+<script>
+    // JavaScript code goes here
+    document.addEventListener('DOMContentLoaded', function () {
+        // Variables to store game state
+        let score = 0;
+        let elapsedTime = 0;
+        let remainingTime = 60; // in seconds
+
+        // DOM elements
+        const scoreDisplay = document.getElementById('score');
+        const elapsedTimeDisplay = document.getElementById('elapsed-time');
+        const remainingTimeDisplay = document.getElementById('remaining-time');
+        const startBtn = document.getElementById('start-btn');
+        const board = document.querySelector('.board');
+
+        // Function to update time display
+        function updateTimeDisplay() {
+            elapsedTimeDisplay.textContent = `Elapsed Time: ${elapsedTime}s`;
+            remainingTimeDisplay.textContent = `Remaining Time: ${remainingTime}s`;
+        }
+
+        // Function to start the game
+        function startGame() {
+            // Reset game state
+            score = 0;
+            elapsedTime = 0;
+            remainingTime = 60;
+
+            // Update display
+            scoreDisplay.textContent = `Score: ${score}`;
+            updateTimeDisplay();
+
+            // Start timer
+            const timerInterval = setInterval(function () {
+                elapsedTime++;
+                remainingTime--;
+
+                updateTimeDisplay();
+
+                // Check if time's up
+                if (remainingTime <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time\'s up! Game over.');
+                    // You can add more game over logic here
+                }
+            }, 1000);
+
+            // Add logic for generating cards and game mechanics
+            // This is where you'll add logic for card flipping, matching, etc.
+        }
+
+        // Event listener for start button
+        startBtn.addEventListener('click', startGame);
+    });
+</script>
 </body>
 </html>
