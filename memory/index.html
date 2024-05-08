@@ -13,47 +13,18 @@
     <h3 id="elapsed-time">Elapsed Time: 0s</h3>
     <h3 id="remaining-time">Remaining Time: 60s</h3>
     <button class="btn" id="start-btn">Start Game</button>
-    <div class="board">
-        <!-- Grid of cards -->
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
-        <div class="card">?</div>
+    <div id="board" class="board">
     </div>
 </div>
 <script>
+
+    //add cards to the board
+    let html = ''
+    for (let i = 0; i < 36; i++) {
+        html += '<div class="card gesloten">?</div>'
+    }
+    document.getElementById('board').innerHTML = html
+
     // JavaScript code goes here
     document.addEventListener('DOMContentLoaded', function () {
         // Variables to store game state
