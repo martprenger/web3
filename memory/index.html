@@ -15,12 +15,21 @@
     <button class="btn" id="start-btn">Start Game</button>
     <div id="board" class="board">
     </div>
+
+    <div class="info_board">
+
+    </div>
 </div>
 <script>
 
     //add cards to the board
     let html = ''
     for (let i = 0; i < 36; i++) {
+        if(i % 2 === 0 ) {
+            html += '<div class="card open">A</div>'
+        } else if(i % 3 === 0){
+            html += '<div class="card gevonden">B</div>'
+        }
         html += '<div class="card gesloten">?</div>'
     }
     document.getElementById('board').innerHTML = html
