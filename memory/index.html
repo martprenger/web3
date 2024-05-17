@@ -34,16 +34,32 @@
 <script>
 
     //add cards to the board
-    let html = ''
-    for (let i = 0; i < 36; i++) {
-        if(i % 2 === 0 ) {
-            html += '<div class="card open">A</div>'
-        } else if(i % 3 === 0){
-            html += '<div class="card gevonden">B</div>'
+    const createMemoryBoard = (rows, cols) => {
+        let html = '';
+        let numPairs = (rows * cols) / 2;
+        let pairs = [];
+
+        // Create pairs
+        for (let i = 1; i <= numPairs; i++) {
+            pairs.push(i);
+            pairs.push(i);
         }
-        html += '<div class="card gesloten">?</div>'
+
+        // Shuffle pairs
+        pairs = pairs.sort(() => 0.5 - Math.random());
+
+        // Create the HTML for the board
+        pairs.forEach((pair, index) => {
+            html += `<div class="card closed" data-value="${pair}">?</div>`;
+        });
+
+        // Set the HTML to the board element
+        document.getElementById('board').innerHTML = html;
     }
-    document.getElementById('board').innerHTML = html
+
+    // Call the function to create a 6x6 memory board
+    createMemoryBoard(6, 6);
+
 
     // JavaScript code goes here
     document.addEventListener('DOMContentLoaded', function () {
