@@ -48,9 +48,30 @@
         // Shuffle pairs
         pairs = pairs.sort(() => 0.5 - Math.random());
 
+        // Randomly select indices for found and picked cards
+        const totalCards = rows * cols;
+        const numFound = Math.floor(totalCards * 0.2); // 20% of the cards are found
+        const foundIndices = new Set();
+
+        while (foundIndices.size < numFound) {
+            foundIndices.add(Math.floor(Math.random() * totalCards));
+        }
+
+        let pickedIndex;
+        do {
+            pickedIndex = Math.floor(Math.random() * totalCards);
+        } while (foundIndices.has(pickedIndex));
+
         // Create the HTML for the board
         pairs.forEach((pair, index) => {
-            html += `<div class="card closed" data-value="${pair}">?</div>`;
+            let cardClass = 'closed';
+            if (foundIndices.has(index)) {
+                cardClass = 'found';
+            } else if (index === pickedIndex) {
+                cardClass = 'picked';
+            }
+
+            html += `<div class="card ${cardClass}" data-value="${pair}">${cardClass === 'closed' ? '?' : pair}</div>`;
         });
 
         // Set the HTML to the board element
@@ -59,6 +80,7 @@
 
     // Call the function to create a 6x6 memory board
     createMemoryBoard(6, 6);
+
 
 
     // JavaScript code goes here

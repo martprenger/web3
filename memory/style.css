@@ -47,17 +47,11 @@ h1, h2 {
     font-size: 20px;
 }
 
-
-.card.open{
-    background-color: yellow;
+.closed {
+    background-color: #ccc;
 }
-
-.card.gevonden{
-    background-color: green;
-}
-.card.gesloten{
-    background-color: red;
-
+.open, .found, .picked {
+    background-color: #fff;
 }
 
 .info_board{
