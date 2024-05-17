@@ -29,6 +29,13 @@ h1, h2 {
     grid-gap: 10px;
     margin-top: 20px;
 }
+
+.container_board{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
 .card {
     width: 100px;
     height: 100px;
@@ -50,5 +57,14 @@ h1, h2 {
 }
 .card.gesloten{
     background-color: red;
+
+}
+
+.info_board{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
 
 }
