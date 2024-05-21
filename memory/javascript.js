@@ -8,7 +8,12 @@ const createMemoryBoard = (rows, cols) => {
     let html = '';
     const numPairs = (rows * cols) / 2;
     let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
-    alphabet.sort(() => 0.5 - Math.random());
+
+    // Fisher-Yates shuffle
+    for (let i = alphabet.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [alphabet[i], alphabet[j]] = [alphabet[j], alphabet[i]];
+    }
 
     let pairs = [];
 
@@ -18,37 +23,30 @@ const createMemoryBoard = (rows, cols) => {
         pairs.push(alphabet[i]);
     }
 
-    // Shuffle the pairs
-    pairs.sort(() => 0.5 - Math.random());
-
-    // Randomly select indices for found and picked cards
-    const totalCards = rows * cols;
-    const numFound = Math.floor(totalCards * 0.2); // 20% of the cards are found
-    const foundIndices = new Set();
-
-    while (foundIndices.size < numFound) {
-        foundIndices.add(Math.floor(Math.random() * totalCards));
+    // Shuffle the pairs using Fisher-Yates shuffle again
+    for (let i = pairs.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pairs[i], pairs[j]] = [pairs[j], pairs[i]];
     }
 
-    let pickedIndex;
-    do {
-        pickedIndex = Math.floor(Math.random() * totalCards);
-    } while (foundIndices.has(pickedIndex));
 
     // Create the HTML for the board
     pairs.forEach((pair, index) => {
         let cardClass = 'closed';
-        if (foundIndices.has(index)) {
-            cardClass = 'found';
-        } else if (index === pickedIndex) {
-            cardClass = 'open';
-        }
-
-        html += `<div class="card ${cardClass}" data-value="${pair}">${cardClass === 'closed' ? '?' : pair}</div>`;
+        html += `<div class="card ${cardClass}" data-value="${pair}">?</div>`;
     });
 
     // Set the HTML to the board element
-    document.getElementById('board').innerHTML = html;
+    const board = document.getElementById('board');
+    board.innerHTML = html;
+
+    // Add event listener to each card
+    const cards = board.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            clickOnCard(this);
+        });
+    });
 };
 
 // Call the function to create a 6x6 memory board
@@ -137,19 +135,24 @@ document.addEventListener('DOMContentLoaded', function () {
     setCardColors();
 });
 
+function clickOnCard(card) {
+    console.log(card)
+    // if closed card make it open
+    if (card.classList.contains('closed')) {
+        card.classList.remove('closed');
+        card.classList.add('open');
+        card.textContent = card.dataset.value;
+    }
+}
+
+
 function setCardColors() {
     const colorCard = localStorage.getItem('colorCard') || defaultColorCard;
     const colorOpen = localStorage.getItem('colorOpen') || defaultColorOpen;
     const colorFound = localStorage.getItem('colorFound') || defaultColorFound;
 
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        if (card.classList.contains('closed')) {
-            card.style.backgroundColor = colorCard;
-        } else if (card.classList.contains('open')) {
-            card.style.backgroundColor = colorOpen;
-        } else if (card.classList.contains('found')) {
-            card.style.backgroundColor = colorFound;
-        }
-    });
+    //set css variables
+    document.documentElement.style.setProperty('--color-card', colorCard);
+    document.documentElement.style.setProperty('--color-open', colorOpen);
+    document.documentElement.style.setProperty('--color-found', colorFound);
 }
