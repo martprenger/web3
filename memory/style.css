@@ -63,11 +63,16 @@ h1, h2 {
     font-size: 20px;
 }
 
-.closed {
-    background-color: #ccc;
+.card.closed {
+    background-color: var(--color-card);
 }
-.open, .found, .picked {
-    background-color: #fff;
+
+.card.open {
+    background-color: var(--color-open);
+}
+
+.card.found {
+    background-color: var(--color-found);
 }
 
 .info_board{
