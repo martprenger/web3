@@ -11,6 +11,7 @@ body {
 }
 .container {
     text-align: center;
+    width: 80%;
 }
 
 .title_text{
@@ -38,6 +39,10 @@ h1, h2 {
     display: grid;
     grid-template-columns: repeat(6, 100px);
     grid-gap: 10px;
+    margin-top: 20px;
+    width: 60%;
+
+
 }
 
 .container_board{
@@ -45,6 +50,7 @@ h1, h2 {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
 }
 .card {
     width: 100px;
@@ -69,7 +75,28 @@ h1, h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 15%;
+    width: 40%;
+    margin: 20px;
+}
+
+
+/* ----------dropdown---------- */
+
+.dropdown_karakter   {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+
+.dropdown_afmetingboard{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+
+.dorpdown_kleuren_platen{
+    display: flex;
+    flex-direction: column;
     margin: 20px;
     padding-left: 15px;
 }

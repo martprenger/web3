@@ -1,3 +1,8 @@
+// Default colors
+const defaultColorCard = '#ff0000';
+const defaultColorOpen = '#00ff00';
+const defaultColorFound = '#0000ff';
+
 //add cards to the board
 const createMemoryBoard = (rows, cols) => {
     let html = '';
@@ -33,7 +38,7 @@ const createMemoryBoard = (rows, cols) => {
         if (foundIndices.has(index)) {
             cardClass = 'found';
         } else if (index === pickedIndex) {
-            cardClass = 'picked';
+            cardClass = 'open';
         }
 
         html += `<div class="card ${cardClass}" data-value="${pair}">${cardClass === 'closed' ? '?' : pair}</div>`;
@@ -45,7 +50,6 @@ const createMemoryBoard = (rows, cols) => {
 
 // Call the function to create a 6x6 memory board
 createMemoryBoard(6, 6);
-
 
 // JavaScript code goes here
 document.addEventListener('DOMContentLoaded', function () {
@@ -100,3 +104,49 @@ document.addEventListener('DOMContentLoaded', function () {
     // Event listener for start button
     startBtn.addEventListener('click', startGame);
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Color input fields
+    const colorCardInput = document.getElementById('colorcard');
+    const colorOpenInput = document.getElementById('coloropen');
+    const colorFoundInput = document.getElementById('colorfound');
+
+    // Set color input fields to saved values or default colors
+    colorCardInput.value = localStorage.getItem('colorCard') || defaultColorCard;
+    colorOpenInput.value = localStorage.getItem('colorOpen') || defaultColorOpen;
+    colorFoundInput.value = localStorage.getItem('colorFound') || defaultColorFound;
+
+    // Save new color values to localStorage when they change
+    colorCardInput.addEventListener('change', function () {
+        localStorage.setItem('colorCard', this.value);
+        setCardColors();
+    });
+
+    colorOpenInput.addEventListener('change', function () {
+        localStorage.setItem('colorOpen', this.value);
+        setCardColors();
+    });
+
+    colorFoundInput.addEventListener('change', function () {
+        localStorage.setItem('colorFound', this.value);
+        setCardColors();
+    });
+    setCardColors();
+});
+
+function setCardColors() {
+    const colorCard = localStorage.getItem('colorCard') || defaultColorCard;
+    const colorOpen = localStorage.getItem('colorOpen') || defaultColorOpen;
+    const colorFound = localStorage.getItem('colorFound') || defaultColorFound;
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        if (card.classList.contains('closed')) {
+            card.style.backgroundColor = colorCard;
+        } else if (card.classList.contains('open')) {
+            card.style.backgroundColor = colorOpen;
+        } else if (card.classList.contains('found')) {
+            card.style.backgroundColor = colorFound;
+        }
+    });
+}
