@@ -6,17 +6,20 @@ const defaultColorFound = '#0000ff';
 //add cards to the board
 const createMemoryBoard = (rows, cols) => {
     let html = '';
-    let numPairs = (rows * cols) / 2;
+    const numPairs = (rows * cols) / 2;
+    let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+    alphabet.sort(() => 0.5 - Math.random());
+
     let pairs = [];
 
     // Create pairs
-    for (let i = 1; i <= numPairs; i++) {
-        pairs.push(i);
-        pairs.push(i);
+    for (let i = 0; i < numPairs; i++) {
+        pairs.push(alphabet[i]);
+        pairs.push(alphabet[i]);
     }
 
-    // Shuffle pairs
-    pairs = pairs.sort(() => 0.5 - Math.random());
+    // Shuffle the pairs
+    pairs.sort(() => 0.5 - Math.random());
 
     // Randomly select indices for found and picked cards
     const totalCards = rows * cols;
@@ -46,7 +49,7 @@ const createMemoryBoard = (rows, cols) => {
 
     // Set the HTML to the board element
     document.getElementById('board').innerHTML = html;
-}
+};
 
 // Call the function to create a 6x6 memory board
 createMemoryBoard(6, 6);
