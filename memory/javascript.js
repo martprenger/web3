@@ -135,13 +135,54 @@ document.addEventListener('DOMContentLoaded', function () {
     setCardColors();
 });
 
+let openCard = null;
+let twoOpenCards = false;
+
 function clickOnCard(card) {
-    console.log(card)
+    // if card is already open, do nothing
+    if (twoOpenCards) {
+        return;
+    }
+
+    if (card.classList.contains('open')) {
+        return;
+    }
+
+    console.log(card);
     // if closed card make it open
     if (card.classList.contains('closed')) {
         card.classList.remove('closed');
         card.classList.add('open');
         card.textContent = card.dataset.value;
+    }
+
+    // if no card is open, this card becomes the open card
+    if (!openCard) {
+        openCard = card;
+    } else {
+        twoOpenCards = true;
+        // if another card is open, check if they match
+        if (openCard.dataset.value === card.dataset.value) {
+            // if they match, they both become found
+            openCard.classList.remove('open');
+            openCard.classList.add('found');
+            card.classList.remove('open');
+            card.classList.add('found');
+            openCard = null;
+            twoOpenCards = false;
+        } else {
+            // if they don't match, close both cards
+            setTimeout(function() {
+                openCard.classList.remove('open');
+                openCard.classList.add('closed');
+                openCard.textContent = '?';
+                card.classList.remove('open');
+                card.classList.add('closed');
+                card.textContent = '?';
+                openCard = null;
+                twoOpenCards = false;
+            }, 1000);
+        }
     }
 }
 
