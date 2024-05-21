@@ -66,13 +66,14 @@
     //add cards to the board
     const createMemoryBoard = (rows, cols) => {
         let html = '';
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         let numPairs = (rows * cols) / 2;
         let pairs = [];
 
         // Create pairs
         for (let i = 1; i <= numPairs; i++) {
-            pairs.push(i);
-            pairs.push(i);
+            pairs.push(alphabet[i]);
+            pairs.push(alphabet[i]);
         }
 
         // Shuffle pairs
