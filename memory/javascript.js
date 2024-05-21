@@ -136,16 +136,24 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 let openCard = null;
-let twoOpenCards = false;
+let secondOpenCard = null;
 
 function clickOnCard(card) {
     // if card is already open, do nothing
-    if (twoOpenCards) {
+    if (card.classList.contains('open')) {
         return;
     }
 
-    if (card.classList.contains('open')) {
-        return;
+    // if there are two open cards, close them immediately
+    if (openCard && secondOpenCard) {
+        openCard.classList.remove('open');
+        openCard.classList.add('closed');
+        openCard.textContent = '?';
+        secondOpenCard.classList.remove('open');
+        secondOpenCard.classList.add('closed');
+        secondOpenCard.textContent = '?';
+        openCard = null;
+        secondOpenCard = null;
     }
 
     console.log(card);
@@ -159,33 +167,20 @@ function clickOnCard(card) {
     // if no card is open, this card becomes the open card
     if (!openCard) {
         openCard = card;
-    } else {
-        twoOpenCards = true;
+    } else if (!secondOpenCard) {
         // if another card is open, check if they match
-        if (openCard.dataset.value === card.dataset.value) {
+        secondOpenCard = card;
+        if (openCard.dataset.value === secondOpenCard.dataset.value) {
             // if they match, they both become found
             openCard.classList.remove('open');
             openCard.classList.add('found');
-            card.classList.remove('open');
-            card.classList.add('found');
+            secondOpenCard.classList.remove('open');
+            secondOpenCard.classList.add('found');
             openCard = null;
-            twoOpenCards = false;
-        } else {
-            // if they don't match, close both cards
-            setTimeout(function() {
-                openCard.classList.remove('open');
-                openCard.classList.add('closed');
-                openCard.textContent = '?';
-                card.classList.remove('open');
-                card.classList.add('closed');
-                card.textContent = '?';
-                openCard = null;
-                twoOpenCards = false;
-            }, 1000);
+            secondOpenCard = null;
         }
     }
 }
-
 
 function setCardColors() {
     const colorCard = localStorage.getItem('colorCard') || defaultColorCard;
