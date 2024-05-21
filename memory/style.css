@@ -1,57 +1,12 @@
-/* styles for desktop devices */
-@media only screen and (min-width: 992px) {
-    body {
-        font-size: 16px;
-        width: 80%;
-        margin: auto;
-    }
+@font-face{
+    font-family: 'Orbitron';
+    src: url("assets/fonts/Orbitron-Black.ttf")
 }
-
-/* styles for tablet devices */
-@media only screen and (min-width: 768px){
-    body {
-        font-size: 14px;
-        width: 90%;
-        margin: auto;
-    }
-}
-
-/* styles for mobile devices */
-@media only screen and (min-width: 991px) {
-    body {
-        font-size: 12px;
-        width: 100%;
-        margin: 0;
-    }
-}
-
 
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: url("wallpapermemory.jpg");
-    background-repeat:no-repeat;
-    background-size:cover;
-
-}
-.container {
-    text-align: center;
-    width: 80%;
+    font-family: Orbitron;
 }
 
-.title_text{
-    color: white;
-    padding-bottom: 10px;
-    filter: drop-shadow(0px 0px 6px #000000);
-}
-
-h1, h2 {
-    margin: 0;
-    padding: 0;
-}
 .btn {
     padding: 10px 20px;
     background-color: #007bff;
@@ -67,19 +22,8 @@ h1, h2 {
     display: grid;
     grid-template-columns: repeat(6, 100px);
     grid-gap: 10px;
-    margin-top: 20px;
-    width: 60%;
-
-
 }
 
-.container_board{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-}
 .card {
     width: 100px;
     height: 100px;
@@ -98,14 +42,6 @@ h1, h2 {
     background-color: #fff;
 }
 
-.info_board{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 40%;
-    margin: 20px;
-}
 
 
 /* ----------dropdown---------- */
@@ -129,14 +65,6 @@ h1, h2 {
     padding-left: 15px;
 }
 
-.scorekeeping{
-    padding: 10px;
-    border: 2px solid black;
-    box-shadow: 5px 5px 5px darkgray;
-    margin: 5px;
-    border-radius: 15px;
-    background-color:lightblue;
-}
 
 .game_info{
     padding: 10px;
@@ -152,7 +80,56 @@ h1, h2 {
     border: 2px solid black;
     box-shadow: 5px 5px 5px darkgray;
     margin: 5px;
-    width: 250px;
     border-radius: 15px;
     background-color:lightblue;
+}
+
+/* Design goes here */
+
+.layout-div{
+    display: grid;
+}
+
+/* Top banner (score & timing) */
+
+.top-banner-div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.top-banner-div h2{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.time-div{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    text-align: center;
+}
+
+/* Bottom banner (Gamename & start button) */
+
+.bottom-banner-div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.bottom-banner-div h1{
+     margin-left: 15px;
+     color: white;
+     filter: drop-shadow(0px 0px 6px #000000);
+}
+
+.bottom-banner-div button{
+    margin: auto;
+    width: 100%;
+    height: 75%;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
