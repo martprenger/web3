@@ -50,9 +50,37 @@ const createMemoryBoard = (rows, cols) => {
     // Set the HTML to the board element
     document.getElementById('board').innerHTML = html;
 };
+// Function to handle the change in board size
+const handleBoardSizeChange = () => {
+    const boardSize = document.getElementById('boardSize').value;
+    if (boardSize) {
+        const [rows, cols] = boardSize.split('x').map(Number);
+        localStorage.setItem('boardSize', JSON.stringify({ rows, cols }));
+        createMemoryBoard(rows, cols);
+    }
+};
 
-// Call the function to create a 6x6 memory board
-createMemoryBoard(6, 6);
+// Function to retrieve the stored board size from local storage
+const getStoredBoardSize = () => {
+    const storedSize = localStorage.getItem('boardSize');
+    if (storedSize) {
+        const { rows, cols } = JSON.parse(storedSize);
+        return { rows, cols };
+    }
+    return null;
+};
+
+// Add event listener to the dropdown
+document.getElementById('boardSize').addEventListener('change', handleBoardSizeChange);
+
+// Get the stored board size and create the memory board
+const storedSize = getStoredBoardSize();
+if (storedSize) {
+    createMemoryBoard(storedSize.rows, storedSize.cols);
+} else {
+    // Create initial board with default size (6x6)
+    createMemoryBoard(6, 6);
+}
 
 // JavaScript code goes here
 document.addEventListener('DOMContentLoaded', function () {
