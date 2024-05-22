@@ -3,10 +3,14 @@ const defaultColorCard = '#ff0000';
 const defaultColorOpen = '#00ff00';
 const defaultColorFound = '#0000ff';
 
+// total number of pairs
+let totalPairs = 0;
+
 //add cards to the board
 const createMemoryBoard = (rows, cols) => {
     let html = '';
     const numPairs = (rows * cols) / 2;
+    totalPairs = numPairs;
     let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 
     // Fisher-Yates shuffle
@@ -138,6 +142,8 @@ document.addEventListener('DOMContentLoaded', function () {
 let openCard = null;
 let secondOpenCard = null;
 
+let foundPairs = 0;
+
 function clickOnCard(card) {
     // if card is already open, do nothing
     if (card.classList.contains('open')) {
@@ -176,9 +182,18 @@ function clickOnCard(card) {
             openCard.classList.add('found');
             secondOpenCard.classList.remove('open');
             secondOpenCard.classList.add('found');
+            foundPairs++;
             openCard = null;
             secondOpenCard = null;
         }
+    }
+
+    if (foundPairs === totalPairs) {
+        setTimeout(function(){
+            // So the page looks okay
+            alert("you won");
+        },100);
+
     }
 }
 
