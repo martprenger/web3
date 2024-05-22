@@ -146,7 +146,7 @@ let foundPairs = 0;
 
 function clickOnCard(card) {
     // if card is already open, do nothing
-    if (card.classList.contains('open')) {
+    if (card.classList.contains('open') || card.classList.contains('found')) {
         return;
     }
 
