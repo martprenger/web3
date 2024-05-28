@@ -1,29 +1,15 @@
+@font-face{
+    font-family: 'Orbitron';
+    src: url("assets/fonts/Orbitron-Black.ttf")
+}
+
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: url("wallpapermemory.jpg");
-    background-repeat:no-repeat;
-    background-size:cover;
-
-}
-.container {
-    text-align: center;
-    width: 80%;
+    font-family: Orbitron;
+    display: inline;
+    margin: auto;
+    overflow: visible;
 }
 
-.title_text{
-    color: white;
-    padding-bottom: 10px;
-    filter: drop-shadow(0px 0px 6px #000000);
-}
-
-h1, h2 {
-    margin: 0;
-    padding: 0;
-}
 .btn {
     padding: 10px 20px;
     background-color: #007bff;
@@ -37,21 +23,10 @@ h1, h2 {
 }
 .board {
     display: grid;
-    grid-template-columns: repeat(6, 100px);
-    grid-gap: 10px;
-    margin-top: 20px;
-    width: 60%;
-
-
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 5px;
 }
 
-.container_board{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-}
 .card {
     width: 100px;
     height: 100px;
@@ -76,44 +51,75 @@ h1, h2 {
     background-color: var(--color-found);
 }
 
-.info_board{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 40%;
-    margin: 20px;
+/* Design goes here */
+
+.layout-div{
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    width: 100%;
 }
 
+/* Top banner (score & timing) */
 
-/* ----------dropdown---------- */
-
-.dropdown_karakter   {
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
+.score-div{
+    grid-column: 1/5;
+    grid-row: 1;
+    margin: auto;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
 }
 
+.time-div{
+    grid-column: 5/10;
+    grid-row: 1;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* board */
+.board-div {
+    grid-column: 1/10;
+    grid-row: 2;
+    max-width: 100%;
+    margin:auto;
+}
+
+/* Bottom banner (Gamename & start button) */
+
+.title-text{
+    color: white;
+    filter: drop-shadow(0px 0px 6px #000000);
+    max-width: 100%;
+    grid-column: 4/6;
+    grid-row: 3;
+    text-align: center;
+}
+
+.start-button-div{
+    grid-column: 6/7;
+    grid-row: 3;
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+/* Dropdowns*/
 .dropdown_afmetingboard{
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
+    grid-column: 4;
+    grid-row: 4;
 }
 
-.dorpdown_kleuren_platen{
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-    padding-left: 15px;
+.dropdown_karakter{
+    grid-column: 5;
+    grid-row: 4;
 }
 
-.scorekeeping{
-    padding: 10px;
-    border: 2px solid black;
-    box-shadow: 5px 5px 5px darkgray;
-    margin: 5px;
-    border-radius: 15px;
-    background-color:lightblue;
+.dropdown_kleuren_platen{
+    grid-column: 6;
+    grid-row: 4;
 }
 
 .game_info{
@@ -123,14 +129,16 @@ h1, h2 {
     margin: 5px;
     border-radius: 15px;
     background-color:lightblue;
+    grid-column: 3/7;
+    grid-row: 5;
 }
-
 .ranking{
     padding: 10px;
     border: 2px solid black;
     box-shadow: 5px 5px 5px darkgray;
     margin: 5px;
-    width: 250px;
     border-radius: 15px;
     background-color:lightblue;
+    grid-column: 3/7;
+    grid-row: 6;
 }
