@@ -53,62 +53,67 @@ const createMemoryBoard = (rows, cols) => {
     });
 };
 
-// Call the function to create a 6x6 memory board
-createMemoryBoard(6, 6);
+// Variables to store game state
+let score = 0;
+let elapsedTime = 0;
+let remainingTime = 60; // in seconds
+let timerInterval = null;
 
-// JavaScript code goes here
-document.addEventListener('DOMContentLoaded', function () {
-    // Variables to store game state
-    let score = 0;
-    let elapsedTime = 0;
-    let remainingTime = 60; // in seconds
+// DOM elements
+const scoreDisplay = document.getElementById('score');
+const elapsedTimeDisplay = document.getElementById('elapsed-time');
+const remainingTimeDisplay = document.getElementById('remaining-time');
+const startBtn = document.getElementById('start-btn');
+const board = document.querySelector('.board');
 
-    // DOM elements
-    const scoreDisplay = document.getElementById('score');
-    const elapsedTimeDisplay = document.getElementById('elapsed-time');
-    const remainingTimeDisplay = document.getElementById('remaining-time');
-    const startBtn = document.getElementById('start-btn');
-    const board = document.querySelector('.board');
 
-    // Function to update time display
-    function updateTimeDisplay() {
-        elapsedTimeDisplay.textContent = `Elapsed Time: ${elapsedTime}s`;
-        remainingTimeDisplay.textContent = `Remaining Time: ${remainingTime}s`;
+// Function to update time display
+function updateTimeDisplay() {
+    elapsedTimeDisplay.textContent = `Elapsed Time: ${elapsedTime}s`;
+    remainingTimeDisplay.textContent = `Remaining Time: ${remainingTime}s`;
+}
+
+function startGame() {
+    // Reset game state
+    score = 0;
+    elapsedTime = 0;
+    remainingTime = 60;
+    openCard = null;
+    secondOpenCard = null;
+    foundPairs = 0;
+
+    if (timerInterval) {
+        clearInterval(timerInterval);
     }
 
-    // Function to start the game
-    function startGame() {
-        // Reset game state
-        score = 0;
-        elapsedTime = 0;
-        remainingTime = 60;
+    // Regenerate the board
+    createMemoryBoard(6, 6);
 
-        // Update display
-        scoreDisplay.textContent = `Score: ${score}`;
+    // Update display
+    scoreDisplay.textContent = `Score: ${score}`;
+    updateTimeDisplay();
+
+    // Start timer
+    timerInterval = setInterval(function () {
+        elapsedTime++;
+        remainingTime--;
+
         updateTimeDisplay();
 
-        // Start timer
-        const timerInterval = setInterval(function () {
-            elapsedTime++;
-            remainingTime--;
+        // Check if time's up
+        if (remainingTime <= 0) {
+            clearInterval(timerInterval);
+            alert('Time\'s up! Game over.');
+            // You can add more game over logic here
+        }
+    }, 1000);
+}
 
-            updateTimeDisplay();
+// Event listener for start button
+startBtn.addEventListener('click', startGame);
 
-            // Check if time's up
-            if (remainingTime <= 0) {
-                clearInterval(timerInterval);
-                alert('Time\'s up! Game over.');
-                // You can add more game over logic here
-            }
-        }, 1000);
-
-        // Add logic for generating cards and game mechanics
-        // This is where you'll add logic for card flipping, matching, etc.
-    }
-
-    // Event listener for start button
-    startBtn.addEventListener('click', startGame);
-});
+// Call the function to create a 6x6 memory board
+createMemoryBoard(6, 6);
 
 document.addEventListener('DOMContentLoaded', function () {
     // Color input fields
@@ -145,6 +150,11 @@ let secondOpenCard = null;
 let foundPairs = 0;
 
 function clickOnCard(card) {
+    // TODO: fix issue where card is reset
+    if (remainingTime === 0 || foundPairs === totalPairs || !timerInterval) {
+        startGame();
+    }
+
     // if card is already open, do nothing
     if (card.classList.contains('open') || card.classList.contains('found')) {
         return;
