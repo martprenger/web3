@@ -8,7 +8,6 @@
     <link rel="icon" type="image/x-icon" href="favicon.png">
 </head>
 <body>
-
 <div class="layout-div">
 
     <div class="score-div">
@@ -72,111 +71,63 @@
 
 </div>
 
-<script>
 
-    //add cards to the board
-    const createMemoryBoard = (rows, cols) => {
-        let html = '';
-        let numPairs = (rows * cols) / 2;
-        let pairs = [];
+<div class="container">
+    <h1 class="title_text">Memory Game</h1>
+    <button class="btn" id="start-btn">Start Game</button>
+    <div class="container_board">
+        <div id="board" class="board">
+        </div>
 
-        // Create pairs
-        for (let i = 1; i <= numPairs; i++) {
-            pairs.push(i);
-            pairs.push(i);
-        }
+        <div class="info_board">
 
-        // Shuffle pairs
-        pairs = pairs.sort(() => 0.5 - Math.random());
+            <div class="scorekeeping">
+                <h2 id="score">Score: 0</h2>
+                <h3 id="elapsed-time">Elapsed Time: 0s</h3>
+                <h3 id="remaining-time">Remaining Time: 60s</h3>
+            </div>
 
-        // Randomly select indices for found and picked cards
-        const totalCards = rows * cols;
-        const numFound = Math.floor(totalCards * 0.2); // 20% of the cards are found
-        const foundIndices = new Set();
+            <div class="game_info">
+                <h2>Info</h2>
+                <p>Memory is een spel waarbij je twee dezelfde kaarten moet vinden. Als je twee dezelfde kaarten hebt
+                    gevonden, dan blijven deze kaarten open staan. Als je twee verschillende kaarten hebt gevonden, dan
+                    gaan deze kaarten weer dicht. Het doel van het spel is om alle kaarten open te hebben staan.</p>
+            </div>
+            <div class="ranking">
+                <h1>Top 5</h1>
+                <p>1.</p>
+                <p>2.</p>
+                <p>3.</p>
+                <p>4.</p>
+                <p>5.</p>
+                <div class="dropdown_karakter">
+                    karakter op kaart: <select name="subject" id="subject">
+                    <option value="" selected="selected">Select subject</option>
+                    <br><br>
+                </select>
+                </div>
 
-        while (foundIndices.size < numFound) {
-            foundIndices.add(Math.floor(Math.random() * totalCards));
-        }
+                <div class="dropdown_afmetingboard">
+                    afmeting board: <select name="topic" id="topic">
+                    <option value="" selected="selected">Please select subject first</option>
+                </select>
+                    <br><br>
+                </div>
 
-        let pickedIndex;
-        do {
-            pickedIndex = Math.floor(Math.random() * totalCards);
-        } while (foundIndices.has(pickedIndex));
+                <div class="dorpdown_kleuren_platen">
+                    <label for="colorcard">kaart kleur:</label>
+                    <input type="color" id="colorcard" name="favcolor" value=""><br><br>
 
-        // Create the HTML for the board
-        pairs.forEach((pair, index) => {
-            let cardClass = 'closed';
-            if (foundIndices.has(index)) {
-                cardClass = 'found';
-            } else if (index === pickedIndex) {
-                cardClass = 'picked';
-            }
+                    <label for="coloropen">Open:</label>
+                    <input type="color" id="coloropen" name="favcolor" value=""><br><br>
 
-            html += `<div class="card ${cardClass}" data-value="${pair}">${cardClass === 'closed' ? '?' : pair}</div>`;
-        });
-
-        // Set the HTML to the board element
-        document.getElementById('board').innerHTML = html;
-    }
-
-    // Call the function to create a 6x6 memory board
-    createMemoryBoard(6, 6);
-
-
-
-    // JavaScript code goes here
-    document.addEventListener('DOMContentLoaded', function () {
-        // Variables to store game state
-        let score = 0;
-        let elapsedTime = 0;
-        let remainingTime = 60; // in seconds
-
-        // DOM elements
-        const scoreDisplay = document.getElementById('score');
-        const elapsedTimeDisplay = document.getElementById('elapsed-time');
-        const remainingTimeDisplay = document.getElementById('remaining-time');
-        const startBtn = document.getElementById('start-btn');
-        const board = document.querySelector('.board');
-
-        // Function to update time display
-        function updateTimeDisplay() {
-            elapsedTimeDisplay.textContent = `Elapsed Time: ${elapsedTime}s`;
-            remainingTimeDisplay.textContent = `Remaining Time: ${remainingTime}s`;
-        }
-
-        // Function to start the game
-        function startGame() {
-            // Reset game state
-            score = 0;
-            elapsedTime = 0;
-            remainingTime = 60;
-
-            // Update display
-            scoreDisplay.textContent = `Score: ${score}`;
-            updateTimeDisplay();
-
-            // Start timer
-            const timerInterval = setInterval(function () {
-                elapsedTime++;
-                remainingTime--;
-
-                updateTimeDisplay();
-
-                // Check if time's up
-                if (remainingTime <= 0) {
-                    clearInterval(timerInterval);
-                    alert('Time\'s up! Game over.');
-                    // You can add more game over logic here
-                }
-            }, 1000);
-
-            // Add logic for generating cards and game mechanics
-            // This is where you'll add logic for card flipping, matching, etc.
-        }
-
-        // Event listener for start button
-        startBtn.addEventListener('click', startGame);
-    });
-</script>
+                    <label for="colorfound">Select your favorite color:</label>
+                    <input type="color" id="colorfound" name="favcolor" value=""><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="javascript.js"></script>
+</div>
 </body>
 </html>
