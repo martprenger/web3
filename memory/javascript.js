@@ -1,12 +1,14 @@
 import {MemoryGame} from './modules/MemoryGame.js';
+import {GameSize} from './modules/GameSize.js';
 
 // Default colors
 const defaultColorCard = '#ff0000';
 const defaultColorOpen = '#00ff00';
 const defaultColorFound = '#0000ff';
 
-// use new memory game class
-const memory = new MemoryGame(6, 6);
+// use new memory game clas
+const gameSize = new GameSize();
+const memory = new MemoryGame(gameSize);
 
 document.addEventListener('DOMContentLoaded', function () {
     // Color input fields

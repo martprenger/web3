@@ -1,7 +1,6 @@
 export class MemoryGame {
-    constructor(sizeX, sizeY) {
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
+    constructor(gameSizeInstance) {
+        this.gameSizeInstance = gameSizeInstance;
 
         this.score = 0;
         this.elapsedTime = 0;
@@ -19,14 +18,14 @@ export class MemoryGame {
         this.secondOpenCard = null;
         this.foundPairs = 0;
 
-        this.createMemoryBoard(sizeX, sizeY);
+        this.createMemoryBoard(this.gameSizeInstance.getGameSize());
         this.startGame = this.startGame.bind(this);
         this.startBtn.addEventListener('click', this.startGame);
     }
 
-    createMemoryBoard(rows, cols) {
+    createMemoryBoard(size) {
         let html = '';
-        const numPairs = (rows * cols) / 2;
+        const numPairs =  size / 2;
         this.totalPairs = numPairs;
         let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 
@@ -89,7 +88,7 @@ export class MemoryGame {
             clearInterval(this.timerInterval);
         }
 
-        this.createMemoryBoard(this.sizeX, this.sizeY);
+        this.createMemoryBoard(this.gameSizeInstance.getGameSize());
 
         this.scoreDisplay.textContent = `Score: ${this.score}`;
         this.updateTimeDisplay();
