@@ -58,6 +58,7 @@ export class MemoryGame {
 
         // Set the HTML to the board element
         const board = document.getElementById('board');
+        board.className = `board size-${size}`;
         board.innerHTML = html;
 
         // Add event listener to each card

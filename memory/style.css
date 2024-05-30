@@ -30,8 +30,19 @@ body {
 
 .board {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
     grid-gap: 1vw;
+}
+
+.size-16 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.size-36 {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.size-64 {
+    grid-template-columns: repeat(8, 1fr);
 }
 
 .card {
