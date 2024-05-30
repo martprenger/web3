@@ -10,7 +10,7 @@ export class GameSize {
         const sizes = [
             {text: 'Small', value: 16},
             {text: 'Medium', value: 36},
-            {text: 'Biggy', value: 64}
+            {text: 'Biggie', value: 64}
         ];
 
         const dropdown = document.getElementById("gameSize");
