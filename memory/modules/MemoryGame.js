@@ -1,6 +1,7 @@
 export class MemoryGame {
-    constructor(gameSizeInstance) {
+    constructor(gameSizeInstance, gameTypeInstance) {
         this.gameSizeInstance = gameSizeInstance;
+        this.gameTypeInstance = gameTypeInstance;
 
         this.score = 0;
         this.elapsedTime = 0;
@@ -27,20 +28,22 @@ export class MemoryGame {
         let html = '';
         const numPairs =  size / 2;
         this.totalPairs = numPairs;
-        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+
+        // get a random order list of the value for the list
+        const cardsValues = this.gameTypeInstance.getCardValues(numPairs);
 
         // Fisher-Yates shuffle
-        for (let i = alphabet.length - 1; i > 0; i--) {
+        for (let i = cardsValues.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [alphabet[i], alphabet[j]] = [alphabet[j], alphabet[i]];
+            [cardsValues[i], cardsValues[j]] = [cardsValues[j], cardsValues[i]];
         }
 
         let pairs = [];
 
         // Create pairs
         for (let i = 0; i < numPairs; i++) {
-            pairs.push(alphabet[i]);
-            pairs.push(alphabet[i]);
+            pairs.push(cardsValues[i]);
+            pairs.push(cardsValues[i]);
         }
 
         // Shuffle the pairs using Fisher-Yates shuffle again
