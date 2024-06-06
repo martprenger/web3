@@ -42,19 +42,15 @@ export class GameType {
         }
     }
 
-    getCats(amount) {
-        // get amount of random cat images from https://cataas.com/
 
-        const cats = [];
 
-        for (let i = 0; i < amount; i++) {
-            // whole numbers only
-            const random = Math.floor(Math.random() * 1000);
-            cats.push(`https://cataas.com/cat/${random}`);
-        }
+    async getCats(amount) {
+        let skip = Math.floor(Math.random() * 100);
+        const response = await fetch(`https://cataas.com/api/cats?tags=funny&type=jpg&size=med&skip=${skip}&limit=${amount}`);
+        const data = await response.json();
 
-        return cats;
-
+        // get _id from the object and create URL
+        return data.map(cat => `https://cataas.com/cat/${cat._id}`);
     }
 
     getAlphabet() {

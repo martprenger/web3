@@ -24,13 +24,13 @@ export class MemoryGame {
         this.startBtn.addEventListener('click', this.startGame);
     }
 
-    createMemoryBoard(size) {
+    async createMemoryBoard(size) {
         let html = '';
         const numPairs =  size / 2;
         this.totalPairs = numPairs;
 
         // get a random order list of the value for the list
-        const cardsValues = this.gameTypeInstance.getCardValues(numPairs);
+        const cardsValues = await this.gameTypeInstance.getCardValues(numPairs);
 
         // Fisher-Yates shuffle
         for (let i = cardsValues.length - 1; i > 0; i--) {
@@ -56,7 +56,10 @@ export class MemoryGame {
         // Create the HTML for the board
         pairs.forEach((pair, index) => {
             let cardClass = 'closed';
-            html += `<div class="card ${cardClass}" data-value="${pair}">?</div>`;
+            html += `<div class="card ${cardClass}" data-value="${pair}">
+                        <p class="text">?</p>
+                        <img src="${pair}" class="img" alt="Card image">
+                     </div>`;
         });
 
         // Set the HTML to the board element
@@ -92,7 +95,7 @@ export class MemoryGame {
             clearInterval(this.timerInterval);
         }
 
-        this.createMemoryBoard(this.gameSizeInstance.getGameSize());
+        this.createMemoryBoard(this.gameSizeInstance.getGameSize()).then(r => console.log('Board created'));
 
         this.scoreDisplay.textContent = `Score: ${this.score}`;
         this.updateTimeDisplay();
@@ -127,10 +130,8 @@ export class MemoryGame {
         if (this.openCard && this.secondOpenCard) {
             this.openCard.classList.remove('open');
             this.openCard.classList.add('closed');
-            this.openCard.textContent = '?';
             this.secondOpenCard.classList.remove('open');
             this.secondOpenCard.classList.add('closed');
-            this.secondOpenCard.textContent = '?';
             this.openCard = null;
             this.secondOpenCard = null;
         }
@@ -140,7 +141,6 @@ export class MemoryGame {
         if (card.classList.contains('closed')) {
             card.classList.remove('closed');
             card.classList.add('open');
-            card.textContent = card.dataset.value;
         }
 
         // if no card is open, this card becomes the open card

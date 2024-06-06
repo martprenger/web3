@@ -55,18 +55,50 @@ body {
     justify-content: center;
     font-size: 40px;
     font-family:'BebasNeue';
+
 }
 
 .card.closed {
     background-color: var(--color-card);
 }
 
+.card.closed p {
+    display: block;
+}
+
+.card.closed img {
+    display: none;
+}
+
 .card.open {
     background-color: var(--color-open);
 }
 
+.card.open p {
+    display: none;
+}
+
+.card.open img {
+    display: block;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}
 .card.found {
     background-color: var(--color-found);
+}
+
+.card.found p {
+    display: none;
+}
+
+.card.found img {
+    display: block;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    width: 100%;
+    height: 100%;
+    padding: 5px;
 }
 
 .layout-div {
