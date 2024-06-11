@@ -6,7 +6,8 @@ export class GameType {
 
     createTypeOptions() {
         const types = [
-            {text: 'Cats', value: 'cats'}
+            {text: 'Cats', value: 'cats'},
+            {text: 'Dogs', value: 'dogs'},
         ];
 
         const dropdown = document.getElementById("gameType");
@@ -37,42 +38,27 @@ export class GameType {
         switch (this.getGameType()) {
             case 'cats':
                 return this.getCats(amount);
+            case 'dogs':
+                return this.getDogs(amount);
             default:
                 return this.getCats(amount);
         }
     }
 
-
-
     async getCats(amount) {
-        let skip = Math.floor(Math.random() * 100);
-        const response = await fetch(`https://cataas.com/api/cats?tags=funny&type=jpg&size=med&skip=${skip}&limit=${amount}`);
+        let skip = 0;
+        const response = await fetch(`https://cataas.com/api/cats?tags=cute&type=jpg&size=med&skip=${skip}&limit=${amount}`);
         const data = await response.json();
 
         // get _id from the object and create URL
         return data.map(cat => `https://cataas.com/cat/${cat._id}`);
     }
 
-    getAlphabet() {
-        return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    }
+    async getDogs(amount) {
+        const response = await fetch(`https://dog.ceo/api/breeds/image/random/${amount}`);
+        const data = await response.json();
 
-    getNumbers() {
-        return '0123456789'.split('');
-    }
-
-    getColors() {
-        return [
-            'red',
-            'blue',
-            'green',
-            'yellow',
-            'purple',
-            'orange',
-            'pink',
-            'brown',
-            'black',
-            'white'
-        ];
+        // The Dog API returns the images in the 'message' field of the response
+        return data.message;
     }
 }

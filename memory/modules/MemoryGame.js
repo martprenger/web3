@@ -31,6 +31,7 @@ export class MemoryGame {
 
         // get a random order list of the value for the list
         const cardsValues = await this.gameTypeInstance.getCardValues(numPairs);
+        console.log(cardsValues);
 
         // Fisher-Yates shuffle
         for (let i = cardsValues.length - 1; i > 0; i--) {
