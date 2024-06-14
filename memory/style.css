@@ -60,6 +60,7 @@ body {
 
 .card.closed {
     background-color: var(--color-card);
+    cursor: pointer;
 }
 
 .card.closed p {
