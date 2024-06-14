@@ -13,7 +13,10 @@ body {
     font-family: Orbitron;
     display: block; /* Changed from inline to block */
     margin: auto;
-
+    background-image: url('assets/wallpaper.jpg');
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
 }
 
 .btn {
@@ -199,21 +202,14 @@ body {
 
 /* media tags for different screens */
 
-@media screen and (min-width: 800px){
+@media (max-aspect-ratio: 3/4) {
     .card{
         width: 9vw;
         height: 9vw;
     }
 }
 
-@media screen and (min-width: 1000px){
-    .card{
-        width: 7vw;
-        height: 7vw;
-    }
-}
-
-@media screen and (min-width: 1400px) {
+@media (min-aspect-ratio: 4/3) {
     .card{
         width: 5vw;
         height: 5vw;
