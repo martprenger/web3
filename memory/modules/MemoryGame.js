@@ -163,7 +163,9 @@ export class MemoryGame {
                 console.log('Total pairs: ', this.totalPairs);
                 if (this.foundPairs === this.totalPairs) {
                     clearInterval(this.timerInterval);
-                    alert('Congratulations! You found all pairs!');
+                    setTimeout(() => {
+                        alert('Congratulations! You found all pairs!');
+                    }, 0);
                     this.gameStarted = false;
                 }
             }
