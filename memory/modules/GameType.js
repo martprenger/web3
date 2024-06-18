@@ -8,6 +8,7 @@ export class GameType {
         const types = [
             {text: 'Cats', value: 'cats'},
             {text: 'Dogs', value: 'dogs'},
+            {text: 'Countries', value: 'countries'}
         ];
 
         const dropdown = document.getElementById("gameType");
@@ -40,6 +41,8 @@ export class GameType {
                 return this.getCats(amount);
             case 'dogs':
                 return this.getDogs(amount);
+            case 'countries':
+                return this.getFlags(amount);
             default:
                 return this.getCats(amount);
         }
@@ -60,5 +63,21 @@ export class GameType {
 
         // The Dog API returns the images in the 'message' field of the response
         return data.message;
+    }
+
+    async getFlags(amount) {
+        try {
+            const response = await fetch(`https://restcountries.com/v3.1/all`);
+            const data = await response.json();
+
+            // Extract flag URLs from the response
+            const flags = data.map(country => country.flags.png);
+
+            // Randomly select 'amount' flag URLs
+            return flags.sort(() => 0.5 - Math.random()).slice(0, amount);
+        } catch (error) {
+            console.error('Error fetching flag data:', error);
+            return [];
+        }
     }
 }
