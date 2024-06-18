@@ -7,11 +7,18 @@ export class GameSize {
     }
 
     createSizeOptions() {
+
         const sizes = [
             {text: 'Small', value: 16},
-            {text: 'Medium', value: 36},
-            {text: 'Biggie', value: 64}
+            {text: 'Medium', value: 36}
         ];
+
+        const mediaQuery = '(max-aspect-ratio: 3/4)';
+        if (!window.matchMedia(mediaQuery).matches) {
+            sizes.push(
+                {text: 'Biggie', value: 64}
+            );
+        }
 
         const dropdown = document.getElementById("gameSize");
         const gameSize = this.getGameSize();

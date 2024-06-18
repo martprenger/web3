@@ -10,7 +10,6 @@ export class MemoryGame {
         this.scoreDisplay = document.getElementById('score');
         this.elapsedTimeDisplay = document.getElementById('elapsed-time');
         this.remainingTimeDisplay = document.getElementById('remaining-time');
-        this.startBtn = document.getElementById('start-btn');
         this.board = document.querySelector('.board');
         this.totalPairs = 0;
         this.gameStarted = false;
@@ -21,7 +20,6 @@ export class MemoryGame {
 
         this.createMemoryBoard(this.gameSizeInstance.getGameSize());
         this.startGame = this.startGame.bind(this);
-        this.startBtn.addEventListener('click', this.startGame);
     }
 
     async createMemoryBoard(size) {
