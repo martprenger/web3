@@ -46,7 +46,6 @@ body {
 
 .card.closed p {
     display: block;
-    font-size: xxx-large;
 }
 
 .card.closed img {
