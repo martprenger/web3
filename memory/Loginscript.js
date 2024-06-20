@@ -1,7 +1,7 @@
-import {CheckUser} from './module/CheckUser.js';
-import {UserRegistration} from './module/UserRegistration.js';
+import {CheckUser} from './modules/CheckUser.js';
 
 
 const checkUser = new CheckUser();
-const userRegistration = new UserRegistration();
+checkUser.addLoginForm();
+
 
