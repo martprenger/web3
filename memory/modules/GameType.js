@@ -1,3 +1,4 @@
+
 export class GameType {
     defaultGameType = 'alphabet';
     constructor() {
@@ -79,5 +80,7 @@ export class GameType {
             console.error('Error fetching flag data:', error);
             return [];
         }
+
+
     }
 }
