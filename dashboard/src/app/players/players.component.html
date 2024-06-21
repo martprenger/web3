@@ -1,3 +1,16 @@
 <app-navbar></app-navbar>
-<p>players works!</p>
+<table>
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let player of playerData">
+    <td>{{ player.username }}</td>
+    <td>{{ player.email }}</td>
+  </tr>
+  </tbody>
+</table>
 

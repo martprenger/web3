@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {catchError, Observable, throwError} from 'rxjs';
+import {catchError, Observable, of, tap, throwError} from 'rxjs';
 import { map } from 'rxjs/operators';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -24,14 +24,24 @@ export class ApiService {
     );
   }
 
-  requireAuth(): void {
-    this.http.get<any>(`${this.url}/api/admin/aggregate`).pipe(
-      catchError((error) => {
-        console.log('error');
-        this.router.navigate(['/login']);
-        return throwError(error);
-      })
-    ).subscribe();
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 
+  isAuthenticated(): Observable<boolean> {
+    return this.http.get<any>(`${this.url}/api/admin/aggregate`, { observe: 'response' }).pipe(
+      map((response: HttpResponse<any>) => {
+        return response.status === 200;
+      }),
+      catchError(error => {
+        console.log(error);
+        return of(false);
+      })
+    );
+  }
+
+  getPlayerData(): Observable<any> {
+    return this.http.get<any>(`${this.url}/api/admin/players`);
+  }
 }
