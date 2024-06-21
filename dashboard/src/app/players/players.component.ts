@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NavbarComponent} from "../navbar/navbar.component";
+import {ApiService} from "../api.service";
 
 @Component({
   selector: 'app-players',
@@ -11,5 +12,10 @@ import {NavbarComponent} from "../navbar/navbar.component";
   styleUrl: './players.component.css'
 })
 export class PlayersComponent {
+  constructor(private apiService: ApiService) {
+    apiService.requireAuth();
+  }
+
+
 
 }

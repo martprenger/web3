@@ -13,5 +13,6 @@ import {ApiService} from "../api.service";
 })
 export class GamesComponent {
   constructor(private apiService: ApiService) {
+    apiService.requireAuth();
   }
 }
