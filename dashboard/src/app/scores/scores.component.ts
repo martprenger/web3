@@ -1,32 +1,33 @@
 import { Component } from '@angular/core';
 import {NavbarComponent} from "../navbar/navbar.component";
 import {ApiService} from "../api/api.service";
-import {NgForOf} from "@angular/common";
-import {FormsModule} from "@angular/forms";
 import {FilterPipe} from "../pipeFilters/filter.pipe";
+import {FormsModule} from "@angular/forms";
+import {NgForOf} from "@angular/common";
 
 @Component({
-  selector: 'app-players',
+  selector: 'app-games',
   standalone: true,
   imports: [
     NavbarComponent,
-    NgForOf,
+    FilterPipe,
     FormsModule,
-    FilterPipe
+    NgForOf
   ],
-  templateUrl: './players.component.html',
-  styleUrl: './players.component.css'
+  templateUrl: './scores.component.html',
+  styleUrl: './scores.component.css'
 })
 
-export class PlayersComponent {
-  public playerData: any;
+export class ScoresComponent {
+  public gamesData: any;
+  public scoreFilter: string = '';
   public usernameFilter: string = '';
-  public emailFilter: string = '';
 
   constructor(private apiService: ApiService) {
-    this.apiService.getPlayerData().subscribe(
+    this.apiService.getScoresData().subscribe(
       data => {
-        this.playerData = data;
+        this.gamesData = data;
+        console.log(this.gamesData);
       },
       error => {
         console.error('Error:', error);

@@ -44,4 +44,12 @@ export class ApiService {
   getPlayerData(): Observable<any> {
     return this.http.get<any>(`${this.url}/api/admin/players`);
   }
+
+  getScoresData(): Observable<any> {
+    return this.http.get<any>(`${this.url}/scores`);
+  }
+
+  getStatisticsData(): Observable<any> {
+    return this.http.get<any>(`${this.url}/api/admin/dates`);
+  }
 }

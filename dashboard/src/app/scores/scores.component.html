@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+
+<input [(ngModel)]="scoreFilter" placeholder="Filter by score">
+<input [(ngModel)]="usernameFilter" placeholder="Filter by username">
+
+<table>
+  <thead>
+  <tr>
+    <th>Score</th>
+    <th>Username</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let player of (gamesData | filter:scoreFilter:'score' | filter:usernameFilter:'username')">
+    <td>{{ player.score }}</td>
+    <td>{{ player.username }}</td>
+  </tr>
+  </tbody>
+</table>
