@@ -1,11 +1,17 @@
 nav {
   background-color: #333;
   padding: 1em;
+  display: flex;
+  justify-content: space-between;
 }
 
 nav ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
 }
 
 nav ul li {
@@ -20,4 +26,8 @@ nav ul li a {
 
 nav ul li a.active {
   font-weight: bold;
+}
+
+.logoutbutton {
+  margin-left: auto;
 }
