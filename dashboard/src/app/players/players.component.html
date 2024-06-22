@@ -1,4 +1,8 @@
 <app-navbar></app-navbar>
+
+<input [(ngModel)]="usernameFilter" placeholder="Filter by username">
+<input [(ngModel)]="emailFilter" placeholder="Filter by email">
+
 <table>
   <thead>
   <tr>
@@ -7,10 +11,9 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let player of playerData">
+  <tr *ngFor="let player of (playerData | filter:usernameFilter:'username' | filter:emailFilter:'email')">
     <td>{{ player.username }}</td>
     <td>{{ player.email }}</td>
   </tr>
   </tbody>
 </table>
-
