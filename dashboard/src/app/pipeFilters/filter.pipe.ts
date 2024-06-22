@@ -15,7 +15,9 @@ export class FilterPipe implements PipeTransform {
     }
     searchText = searchText.toLowerCase();
     return items.filter(it => {
-      return it[field].toLowerCase().includes(searchText);
+      // make it[field] a string
+      let temp = it[field] + '';
+      return temp.toLowerCase().includes(searchText);
     });
   }
 }
