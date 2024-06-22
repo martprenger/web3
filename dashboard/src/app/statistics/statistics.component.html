@@ -1,13 +1,16 @@
 <app-navbar></app-navbar>
 
-<div>
-  <label for="dateFrom">From:</label>
-  <input type="date" id="dateFrom" [(ngModel)]="dateFrom">
+<div class="layoutdiv">
+  <div class="filter">
+    <label for="dateFrom">From:</label>
+    <input type="date" id="dateFrom" [(ngModel)]="dateFrom">
 
-  <label for="dateTo">To:</label>
-  <input type="date" id="dateTo" [(ngModel)]="dateTo">
+    <label for="dateTo">To:</label>
+    <input type="date" id="dateTo" [(ngModel)]="dateTo">
+  </div>
 </div>
 
+<div class="list">
 <table>
   <thead>
   <tr>
@@ -22,3 +25,4 @@
   </tr>
   </tbody>
 </table>
+</div>
