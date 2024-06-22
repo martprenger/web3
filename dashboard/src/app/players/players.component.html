@@ -15,7 +15,7 @@
       <tbody>
         <tr *ngFor="let player of (playerData | filter:usernameFilter:'username' | filter:emailFilter:'email')">
           <td>{{ player.username }}</td>
-          <td>{{ player.email }}</td>
+          <td class="emailtd">{{ player.email }}</td>
         </tr>
       </tbody>
     </table>
