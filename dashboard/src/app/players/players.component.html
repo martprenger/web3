@@ -1,19 +1,23 @@
 <app-navbar></app-navbar>
-
-<input [(ngModel)]="usernameFilter" placeholder="Filter by username">
-<input [(ngModel)]="emailFilter" placeholder="Filter by email">
-
-<table>
-  <thead>
-  <tr>
-    <th>Username</th>
-    <th>Email</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let player of (playerData | filter:usernameFilter:'username' | filter:emailFilter:'email')">
-    <td>{{ player.username }}</td>
-    <td>{{ player.email }}</td>
-  </tr>
-  </tbody>
-</table>
+<div class="layoutdiv">
+  <div class="filter">
+    <input [(ngModel)]="usernameFilter" placeholder="Filter by username">
+    <input [(ngModel)]="emailFilter" placeholder="Filter by email">
+  </div>
+  <div class="list">
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of (playerData | filter:usernameFilter:'username' | filter:emailFilter:'email')">
+          <td>{{ player.username }}</td>
+          <td>{{ player.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
