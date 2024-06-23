@@ -9,11 +9,20 @@
 <body>
 
     <div class="container">
-        <form id="setPreferenceForm">
-    
+         <!-- Default heading, will be updated by JS -->
+        <form id="preferences-form">
+            <h1 id="page-title">Player Preferences</h1>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="found-color">Color for Found Cards:</label>
+            <input type="color" id="found-color" name="foundColor" required>
+            <br>
+            <label for="closed-color">Color for Closed Cards:</label>
+            <input type="color" id="closed-color" name="closedColor" required>
+            <br>
+            <button type="submit">Save Preferences</button>
         </form>
-
-
         
 
     </div>

@@ -11,3 +11,5 @@ const gameSize = new GameSize();
 const gameType = new GameType();
 const memory = new MemoryGame(gameSize, gameType);
 const profilePreference = new ProfilePreference();
+
+profilePreference.setPreferenceButton();
