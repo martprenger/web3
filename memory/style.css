@@ -134,7 +134,7 @@ body {
 }
 
 .dropdown_kleuren_platen {
-    grid-row: 4;
+    grid-row: 7;
     grid-column: 1/7;
     text-align: center;
     background-color: rgba(173, 216, 230, 0.5); /* Blue transparent background */
