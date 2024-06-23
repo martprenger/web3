@@ -9,3 +9,5 @@ const gameColor = new GameColor();
 const gameSize = new GameSize();
 const gameType = new GameType();
 const memory = new MemoryGame(gameSize, gameType);
+
+const topscore = new TopScore();
