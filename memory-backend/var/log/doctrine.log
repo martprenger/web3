@@ -1,0 +1,2 @@
+2024-06-23 17:51:28		Connecting with parameters array{"driver":"pdo_sqlite","host":"localhost","port":null,"user":"root","password":null,"driverOptions":[],"defaultTableOptions":[],"path":"/media/hdd/repos/web3/memory-backend/var/data.db","charset":"utf8"}
+2024-06-23 17:51:28		Disconnecting
