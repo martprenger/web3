@@ -1,4 +1,4 @@
-FROM php:8.1-alpine
+FROM php:8.3-alpine
 
 # Install composer
 RUN apk add --no-cache curl

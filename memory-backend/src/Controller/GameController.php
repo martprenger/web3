@@ -39,18 +39,29 @@ class GameController extends AbstractController {
 
     #[Route('/save', methods:['POST'])]
     public function saveGame(ManagerRegistry $doctrine):Response {
-        set_error_handler(fn() => throw new \ErrorException());
+        set_error_handler(function ($severity, $message, $file, $line) {
+            if (!(error_reporting() & $severity)) {
+                // This error code is not included in error_reporting, so ignore it
+                return;
+            }
+            if ($severity === E_USER_DEPRECATED || $severity === E_DEPRECATED) {
+                // Ignore deprecation warnings
+                return;
+            }
+            throw new \ErrorException($message, 0, $severity, $file, $line);
+        });
         try {
             $params = json_decode(Request::createFromGlobals()->getContent(), true);
             $em = $doctrine->getManager();
-            $player = $em->find(Player::class, $params['id']);
+            $playerRepo = $em->getRepository(Player::class);
+            $player = $playerRepo->find($params['id']);
 
             $player->addGame(new Game($player, $params));
             $em->persist($player);
             $em->flush();
             return new JsonResponse($player);
         } catch (\ErrorException $e) {
-            return new Response('', 400);
+            return new Response($e, 400);
         }
     }
 }
