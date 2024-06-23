@@ -233,19 +233,19 @@ body {
     }
 
     .game-type {
-        border-radius: 2vw;
+        border-radius: 1vw;
     }
 
     .dropdown_kleuren_platen {
-        border-radius: 2vh;
+        border-radius: 1vw;
     }
 
     .ranking {
-        border-radius: 2vw;
+        border-radius: 1vw;
     }
 
     .game_info {
-        border-radius: 2vw;
+        border-radius: 1vw;
     }
 
     .board-div {

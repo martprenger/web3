@@ -20,6 +20,8 @@ export class MemoryGame {
 
         this.createMemoryBoard(this.gameSizeInstance.getGameSize());
         this.startGame = this.startGame.bind(this);
+
+        document.getElementById('reload').addEventListener('click', this.startGame);
     }
 
     async createMemoryBoard(size) {
