@@ -6,9 +6,13 @@ import { ProfilePreference } from './modules/ProfilePreference.js';
 import { TopScores } from './modules/TopScores.js';
 import { OverwriteFetch } from "./modules/OverwriteFetch.js";
 import { JWT } from "./modules/JWT.js";
+import { RequireLogin } from "./modules/RequireLogin.js";
 
 const overwriteFetch = new OverwriteFetch();
 const jwt = new JWT();
+
+//require login
+const requireLogin = new RequireLogin(jwt);
 
 // use new memory game clas
 const gameColor = new GameColor();
@@ -22,3 +26,5 @@ const topScores = new TopScores();
 // adds profile preference button
 const profilePreference = new ProfilePreference(jwt);
 profilePreference.setPreferenceButton();
+
+
