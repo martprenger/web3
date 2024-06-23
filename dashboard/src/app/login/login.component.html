@@ -1,0 +1,16 @@
+<div class="wrapperclass">
+<form (ngSubmit)="login()">
+  <div class="username-div">
+    <label for="username">Username</label><br>
+    <input type="text" id="username" [(ngModel)]="username" name="username" required>
+  </div>
+  <div class="password-div">
+    <label for="password">Password</label><br>
+    <input type="password" id="password" [(ngModel)]="password" name="password" required>
+  </div>
+  <div *ngIf="errorMessage" class="error">
+    {{errorMessage}}
+  </div>
+  <button type="submit">Login</button>
+</form>
+</div>

@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+
+<div class="layoutdiv">
+  <div class="filter">
+    <label for="dateFrom">From:</label>
+    <input type="date" id="dateFrom" [(ngModel)]="dateFrom">
+
+    <label for="dateTo">To:</label>
+    <input type="date" id="dateTo" [(ngModel)]="dateTo">
+  </div>
+</div>
+
+<div class="list">
+<table>
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Amount of games</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let game of gamesData | dateRangeFilter:dateFrom:dateTo">
+    <td>{{ game.date }}</td>
+    <td>{{ game.games }}</td>
+  </tr>
+  </tbody>
+</table>
+</div>

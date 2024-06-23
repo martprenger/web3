@@ -1,0 +1,31 @@
+body {
+  height: 100vh; /* Full height of the viewport */
+  margin: 0;
+}
+
+form {
+  flex-direction: column;
+  margin: auto;
+}
+
+
+button {
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+}
+
+.wrapperclass {
+  text-align: center;
+  font-size: x-large;
+  padding: 2vw;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
