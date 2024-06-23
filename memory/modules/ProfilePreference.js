@@ -1,6 +1,7 @@
 export class ProfilePreference{
 
-    constructor(){
+    constructor(JWT){
+        this.JWT = JWT;
     }
 
 
@@ -12,24 +13,7 @@ export class ProfilePreference{
 
     changePreference(){
         document.addEventListener('DOMContentLoaded', function () {
-            // Step 1: Retrieve the JWT token from localStorage
-            const jwtToken = localStorage.getItem('jwt_token');
-            
-            if (!jwtToken) {
-                console.error('JWT token not found in localStorage');
-                return;
-            }
-        
-            // Step 2: Decode the JWT token to get the payload
-            const base64Url = jwtToken.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const payload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-        
-            // Step 3: Parse the payload to extract the player ID
-            const parsedPayload = JSON.parse(payload);
-            const playerId = parsedPayload.sub; // Adjust 'sub' if your token uses a different key for the player ID
+            const playerId = this.JWT.getPlayerId();
         
             // Use the extracted player ID in your fetch request
             fetch(`http://localhost:8000/api/player/${playerId}`, {

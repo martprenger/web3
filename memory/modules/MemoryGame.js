@@ -1,7 +1,8 @@
 export class MemoryGame {
-    constructor(gameSizeInstance, gameTypeInstance) {
+    constructor(gameSizeInstance, gameTypeInstance, JWT) {
         this.gameSizeInstance = gameSizeInstance;
         this.gameTypeInstance = gameTypeInstance;
+        this.JWT = JWT;
 
         this.score = 0;
         this.elapsedTime = 0;
@@ -110,6 +111,7 @@ export class MemoryGame {
             if (this.remainingTime <= 0) {
                 clearInterval(this.timerInterval);
                 alert('Time\'s up! MemoryGame over.');
+                this.sendGameResult(this.score);
                 this.gameStarted = false;
             }
         }, 1000);
@@ -166,9 +168,24 @@ export class MemoryGame {
                     setTimeout(() => {
                         alert('Congratulations! You found all pairs!');
                     }, 0);
+                    this.sendGameResult(this.score);
                     this.gameStarted = false;
                 }
             }
         }
+    }
+
+    sendGameResult(score) {
+        var id = this.JWT.getPlayerId();
+
+        var data = {
+            id: id,
+            score: score
+        };
+
+        fetch(`http://localhost:8000/game/save`, {
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
     }
 }

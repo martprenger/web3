@@ -5,18 +5,20 @@ import {GameType} from "./modules/GameType.js";
 import { ProfilePreference } from './modules/ProfilePreference.js';
 import { TopScores } from './modules/TopScores.js';
 import { OverwriteFetch } from "./modules/OverwriteFetch.js";
+import { JWT } from "./modules/JWT.js";
 
 const overwriteFetch = new OverwriteFetch();
+const jwt = new JWT();
 
 // use new memory game clas
 const gameColor = new GameColor();
 const gameSize = new GameSize();
 const gameType = new GameType();
-const memory = new MemoryGame(gameSize, gameType);
+const memory = new MemoryGame(gameSize, gameType, jwt);
 
 // show list of best players
 const topScores = new TopScores();
 
 // adds profile preference button
-const profilePreference = new ProfilePreference();
+const profilePreference = new ProfilePreference(jwt);
 profilePreference.setPreferenceButton();
