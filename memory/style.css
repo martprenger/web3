@@ -125,7 +125,7 @@ body {
 
 .game-type {
     grid-row: 4;
-    grid-column: 1/4;
+    grid-column: 1/7;
     text-align: center;
     background-color: rgba(173, 216, 230, 0.5); /* Blue transparent background */
     border: 2px solid #353C40; /* Black border */
@@ -135,7 +135,7 @@ body {
 
 .dropdown_kleuren_platen {
     grid-row: 4;
-    grid-column: 4/7;
+    grid-column: 1/7;
     text-align: center;
     background-color: rgba(173, 216, 230, 0.5); /* Blue transparent background */
     border: 2px solid #353C40; /* Black border */
@@ -167,16 +167,22 @@ body {
     margin: 2vw;
 }
 
-/* media tags for different screens */
-
-@media (max-aspect-ratio: 3/4) {
+.profile{
+    grid-column: 6;
+    grid-row: 1;
+    justify-content: end; /* Centers columns horizontally */
+    align-content: center; /* Centers grid items vertically, if applicable */
+    filter: drop-shadow(0px 0px 6px #000000);
+    cursor: pointer;
 }
 
+.reload{
+    margin-bottom: 2em;
+}
+
+/* media tags for different screens */
+
 @media (min-aspect-ratio: 4/3) {
-    .board-div {
-        grid-column: 2/6;
-        grid-row: 2/6;
-    }
 
     .ranking {
         grid-column: 1;
@@ -210,9 +216,8 @@ body {
     .dropdown_kleuren_platen {
         grid-column: 6;
         grid-row: 3;
+        border-radius: 1vw;
     }
-
-
 
     .size-16 {
         grid-template-columns: repeat(4, calc(85vh /4));
@@ -236,10 +241,6 @@ body {
         border-radius: 1vw;
     }
 
-    .dropdown_kleuren_platen {
-        border-radius: 1vw;
-    }
-
     .ranking {
         border-radius: 1vw;
     }
@@ -251,5 +252,12 @@ body {
     .board-div {
         grid-column: 1/7;
         grid-row: 2/5;
+    }
+
+    .profile{
+        grid-column: 5;
+        grid-row: 1;
+        justify-content: end; /* Centers columns horizontally */
+        align-content: center; /* Centers grid items vertically, if applicable */
     }
 }
